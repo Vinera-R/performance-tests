@@ -14,7 +14,7 @@ create_user_response = httpx.post("http://localhost:8003/api/v1/users", json=cre
 print("Create user response:", create_user_response.json())
 print("Status code:", create_user_response.status_code)
 
-# Получение user_id из ответа
+# Получение user_id
 user_id = create_user_response.json()['user']['id']
 
 # GET-запрос для получения информации по user_id
