@@ -10,6 +10,6 @@ class HTTPClient():
     def get(self, url: URL | str, params: QueryParams | None = None) -> Response:
         return self.client.get(url, params=params)
 
-    def post(self, url: URL | str, json: Any | None = None) -> Response:
+    def post(self, url: URL | str, json: Any | None = None):
         return self.client.post(url, json=json)
 
