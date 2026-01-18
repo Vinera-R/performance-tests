@@ -1,49 +1,37 @@
-from clients.http.client import HTTPClient
 from typing import TypedDict
 from httpx import Response
+from clients.http.client import HTTPClient
 
-class CreateUserRequestDict(TypedDict):
+class IssueVirtualCardRequestDict(TypedDict):
     """
-    Структура данных для создания нового пользователя.
+    Структура данных для выпуска виртуальной карты.
     """
-    email: str
-    lastName: str
-    firstName: str
-    middleName: str
-    phoneNumber: str
+    userId: str
+    accountId: str
 
-class UsersGatewayHTTPClient(HTTPClient):
+class IssuePhysicalCardRequestDict(TypedDict):
     """
-    Клиент для взаимодействия с /api/v1/users сервиса http-gateway.
+    Структура данных для выпуска физической карты.
     """
-    def get_user_api(self, user_id: str) -> Response:
-        """
-        Получить данные пользователя по его user_id.
-
-        :param user_id: Идентификатор пользователя.
-        :return: Ответ от сервера (объект httpx.Response).
-        """
-        return self.get(f"/api/v1/users/{user_id}")
+    userId: str
+    accountId: str
 
 class CardsGatewayHTTPClient(HTTPClient):
     """
     Клиент для взаимодействия с /api/v1/cards сервиса http-gateway.
     """
-    def issue_virtual_card_api(self, request: CreateUserRequestDict) -> Response:
+    def issue_virtual_card_api(self, request: IssueVirtualCardRequestDict) -> Response:
         """
-        Выполняет POST-запрос к эндпоинту /api/v1/cards/issue-virtual-card для создания виртуальной карты.
-
-        :param request: словарь с данными для создания виртуальной карты.
-        :return: ответ от сервера (httpx.Response).
+        Выпуск виртуальной карты.
+        :param request: Словарь с данными для выпуска виртуальной карты.
+        :return: Ответ от сервера (объект httpx.Response).
         """
-        return self.post(f"/api/v1/cards/issue-virtual-card", json=request)
+        return self.post("/api/v1/cards/issue-virtual-card", json=request)
 
-    def issue_physical_card_api(self, request: CreateUserRequestDict) -> Response:
+    def issue_physical_card_api(self, request: IssuePhysicalCardRequestDict) -> Response:
         """
-        Выполняет POST-запрос к эндпоинту /api/v1/cards/issue-physical-card для создания физической карты.
-
-        :param request: словарь с данными для создания физической карты.
-        :return: ответ от сервера (httpx.Response).
+        Выпуск физической карты.
+        :param request: Словарь с данными для выпуска физической карты.
+        :return: Ответ от сервера (объект httpx.Response).
         """
-        return self.post(f"/api/v1/cards/issue-physical-card", json=request.json)
-
+        return self.post("/api/v1/cards/issue-physical-card", json=request)
