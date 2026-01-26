@@ -22,3 +22,5 @@ issue_physical_card_response = cards_gateway_client.issue_physical_card(
     account_id=open_debit_card_account_response['account']['id']
 )
 print('Issue physical card response:', open_debit_card_account_response)
+
+
