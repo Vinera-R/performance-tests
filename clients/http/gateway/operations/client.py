@@ -91,7 +91,7 @@ class OperationsGatewayHTTPClient(HTTPClient):
         :param operation_id: Уникальный идентификатор операции.
         :return: Объект Response с чеком операции.
         """
-        return self.get(f"/api/v1/operations/operation-receipt/{operation_id}/receipt")
+        return self.get(f"/api/v1/operations/operation-receipt/{operation_id}")
 
     def get_operations_api(self, query: GetOperationsQueryDict) -> Response:
         """
@@ -100,7 +100,7 @@ class OperationsGatewayHTTPClient(HTTPClient):
         :param query: Параметры запроса, содержащие accountId.
         :return: Объект Response со списком операций.
         """
-        return self.get("/api/v1/operations", params=QueryParams)
+        return self.get("/api/v1/operations", params=QueryParams(**query))
 
     def get_operations_summary_api(self, query: GetOperationSummaryQueryDict) -> Response:
         """
