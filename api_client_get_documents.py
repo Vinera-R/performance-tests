@@ -13,25 +13,25 @@ documents_gateway_client = build_documents_gateway_http_client()
 create_user_response = users_gateway_client.create_user()
 print('Create user response:', create_user_response)
 
-user_id = create_user_response['user']['id']
+user_id = create_user_response.user.id
 
 '''Создаем кредитный счет для этого пользователя'''
 open_credit_card_account_response = account_gateway_client.open_credit_card_account(
-    user_id=user_id,
+    user_id=create_user_response.user.id,
 )
 print('Open credit card account response:', open_credit_card_account_response)
 
-account_id = open_credit_card_account_response['account']['id']
+account_id = open_credit_card_account_response.account.id
 
 '''Получает документ тарифа'''
 get_tariff_document_response = documents_gateway_client.get_tariff_document(
-    account_id=account_id,
+    account_id=open_credit_card_account_response.account.id
 )
 print('Get tariff document response:', get_tariff_document_response)
 
 '''Получает документ контракта'''
 get_contract_document_response = documents_gateway_client.get_contract_document(
-    account_id=account_id,
+    account_id=open_credit_card_account_response.account.id
 )
 print('Get contract document response:', get_contract_document_response)
 

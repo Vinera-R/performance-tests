@@ -13,13 +13,13 @@ print('Get user response:', create_user_response)
 
 '''Создаем дебетовый счет'''
 open_debit_card_account_response = account_gateway_client.open_debit_card_account(
-    user_id=create_user_response['user']['id'],
+    user_id=create_user_response.user.id,
 )
 print('Open debit card account response:', create_user_response)
 
 issue_physical_card_response = cards_gateway_client.issue_physical_card(
-    user_id=create_user_response['user']['id'],
-    account_id=open_debit_card_account_response['account']['id']
+    user_id=create_user_response.user.id,
+    account_id=open_debit_card_account_response.account.id
 )
 print('Issue physical card response:', open_debit_card_account_response)
 

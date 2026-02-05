@@ -12,13 +12,16 @@ class UserSchema(BaseModel):
         middle_name: str = Field(alias="middleName")
         phone_number: str = Field(alias="phoneNumber")
 
-''' Создание пользователя'''
 class CreateUserRequestSchema(BaseModel):
-        email: EmailStr
-        lastName: str = Field(alias="lastName", default="Иванов")
-        firstName: str = Field(alias="firstName", default="Иван")
-        middleName: str= Field(alias="middleName", default="Иванович")
-        phoneNumber: str = Field(alias="phoneNumber", default="87998757466")
+    """
+    Описание структуры запроса на создание пользователя.
+    """
+    email: EmailStr
+    last_name: str = Field(alias="lastName")
+    first_name: str = Field(alias="firstName")
+    middle_name: str = Field(alias="middleName")
+    phone_number: str = Field(alias="phoneNumber")
+
 
 '''ответ API, содержащий объект пользователя в ключе 'user' '''
 class CreateUserResponseSchema(BaseModel):
