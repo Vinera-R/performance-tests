@@ -1,5 +1,6 @@
 from pydantic import Field, BaseModel, ConfigDict
 from enum import Enum, StrEnum
+from tools.fakers import fake
 
 class OperationType(StrEnum):
     FEE = 'FEE'
@@ -97,8 +98,9 @@ class MakeOperationRequestSchema(BaseModel):
     """
     Базовая структура тела запроса для создания финансовой операции.
     """
-    status: OperationStatus
-    amount: float
+    status: OperationStatus = Field(default_factory=lambda: fake.enum(OperationStatus))
+    amount: float = Field(default_factory=lambda: fake.amount())
+    category: str = Field(default_factory=lambda: fake.category())
     card_id: str = Field(alias='cardId')
     account_id: str = Field(alias='accountId')
 
@@ -166,7 +168,7 @@ class MakePurchaseOperationRequestSchema(MakeOperationRequestSchema):
     Дополнительное поле:
     - category: категория покупки.
     """
-    category: str
+    pass
 
 
 class MakePurchaseOperationResponseSchema(BaseModel):
