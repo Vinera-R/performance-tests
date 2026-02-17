@@ -15,9 +15,8 @@ from contracts.services.gateway.operations.rpc_make_purchase_operation_pb2 impor
 from contracts.services.gateway.operations.rpc_make_bill_payment_operation_pb2 import MakeBillPaymentOperationRequest, MakeBillPaymentOperationResponse
 from contracts.services.gateway.operations.rpc_make_cash_withdrawal_operation_pb2 import MakeCashWithdrawalOperationRequest, MakeCashWithdrawalOperationResponse
 from contracts.services.gateway.operations.operations_gateway_service_pb2_grpc import OperationsGatewayServiceStub
-from tools.fakers import Fake
 
-fake = Fake()
+from tools.fakers import fake
 
 
 class OperationsGatewayGRPCClient(GRPCClient):
@@ -31,7 +30,7 @@ class OperationsGatewayGRPCClient(GRPCClient):
         Инициализация клиента с указанным gRPC-каналом.
         :param channel: gRPC-канал для подключения к OperationsService.
         """
-        super().__init__()
+        super().__init__(channel=channel)
         self.stub = OperationsGatewayServiceStub(channel)
 
     """ Низкоуровневые методы """
